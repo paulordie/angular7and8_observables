@@ -19,11 +19,13 @@ export class BasicComponent implements OnInit {
         observer.next(3);
         observer.next(4);
         observer.next(5);
+        observer.error("6");
         observer.complete();
       }
     );
     myFirstObservable.subscribe(
-      (n: number) => console.log(n), (error) => console.log(error),
+      (n: number) => console.log(n), 
+      (error) => console.error(error),
       () => console.log('completed'))
   }
 
