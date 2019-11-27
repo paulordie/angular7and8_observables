@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, interval } from 'rxjs';
 import { nextTick } from 'q';
 
 @Component({
@@ -26,7 +26,13 @@ export class BasicComponent implements OnInit {
     myFirstObservable.subscribe(
       (n: number) => console.log(n), 
       (error) => console.error(error),
-      () => console.log('completed'))
+      () => console.log('completed'));
+
+    const timerCount = interval(500);
+    timerCount.subscribe(
+        (n) => console.log(n)
+      );
+    console.log("after interval");
   }
 
 }
