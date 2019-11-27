@@ -22,9 +22,9 @@ export class BasicComponent implements OnInit {
         observer.complete();
       }
     );
-    myFirstObservable.subscribe((n: number) => {
-      console.log(n);
-    });
+    myFirstObservable.subscribe(
+      (n: number) => console.log(n), (error) => console.log(error),
+      () => console.log('completed'))
   }
 
 }
