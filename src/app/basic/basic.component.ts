@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer, interval } from 'rxjs';
+import { Observable, Observer, interval, observable, Subscription } from 'rxjs';
 import { nextTick } from 'q';
 
 @Component({
@@ -9,9 +9,17 @@ import { nextTick } from 'q';
 })
 export class BasicComponent implements OnInit {
 
+  subscription1: Subscription;
+  n1: number = 0;
+  n2: number = 0;
+  s1: string = "";
+  s2: string = "";
   constructor() { }
 
   ngOnInit() {
+    this.s1 = 'Initializing...';
+    this.s2 = 'Initializing...';
+    
     const myFirstObservable = new Observable(
       (observer: Observer<number>) => {
         observer.next(1); // quem estiver observando esse objeto verá essas infors next(1)...
@@ -28,11 +36,29 @@ export class BasicComponent implements OnInit {
       (error) => console.error(error),
       () => console.log('completed'));
 
-    const timerCount = interval(500);
-    timerCount.subscribe(
-        (n) => console.log(n)
-      );
-    console.log("after interval");
-  }
+    // const timerCount = interval(500);
+    // timerCount.subscribe(
+    //     (n) => console.log(n)
+    //   );
+    // console.log("after interval");
 
+    const myIntervalObservable = new Observable(
+      (observer: Observer<any>) => {
+        let i: number = 0;
+        setInterval(()=>{
+          i++;
+          console.log('from Observable: ', i);
+          if (i == 10)
+            observer.complete();
+          else if (i%2 == 0)
+            observer.next(i);
+        }, 1000);
+      }
+    );
+    this.subscription1 = myIntervalObservable.subscribe(
+      (_n) => {this.n1 = _n},
+      (error) => {this.s1 = 'Error: ' + error},
+      () => {this.s1 = 'Completed'}
+    );
+  }
 }
