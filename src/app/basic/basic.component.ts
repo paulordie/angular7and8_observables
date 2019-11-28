@@ -19,8 +19,8 @@ export class BasicComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.s1 = 'Initializing...';
-    this.s2 = 'Initializing...';
+    this.s1 = 'Initializing s1...';
+    this.s2 = 'Initializing s2...';
 
     const myFirstObservable = new Observable(
       (observer: Observer<number>) => {
@@ -63,12 +63,12 @@ export class BasicComponent implements OnInit {
     this.subscription1 = myIntervalObservable.subscribe(
       (_n) => {this.n1 = _n},
       (error) => {this.s1 = 'Error: ' + error},
-      () => {this.s1 = 'Completed'}
+      () => {this.s1 = 'Completed s1'}
     );
     this.subscription2 = myIntervalObservable.subscribe(
       (_n) => {this.n2 = _n},
       (error) => {this.s2 = 'Error: ' + error},
-      () => {this.s2 = 'Completed'}
+      () => {this.s2 = 'Completed s2'}
     );
     setTimeout(()=>{
       this.subscription1.unsubscribe();
