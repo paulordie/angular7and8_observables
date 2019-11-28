@@ -19,7 +19,7 @@ export class BasicComponent implements OnInit {
   ngOnInit() {
     this.s1 = 'Initializing...';
     this.s2 = 'Initializing...';
-    
+
     const myFirstObservable = new Observable(
       (observer: Observer<number>) => {
         observer.next(1); // quem estiver observando esse objeto verá essas infors next(1)...
@@ -45,7 +45,7 @@ export class BasicComponent implements OnInit {
     const myIntervalObservable = new Observable(
       (observer: Observer<any>) => {
         let i: number = 0;
-        setInterval(()=>{
+        let id = setInterval(()=>{
           i++;
           console.log('from Observable: ', i);
           if (i == 10)
@@ -53,6 +53,9 @@ export class BasicComponent implements OnInit {
           else if (i%2 == 0)
             observer.next(i);
         }, 1000);
+        return () => {
+          clearInterval(id);
+        }
       }
     );
     this.subscription1 = myIntervalObservable.subscribe(
