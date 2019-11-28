@@ -10,6 +10,8 @@ import { nextTick } from 'q';
 export class BasicComponent implements OnInit {
 
   subscription1: Subscription;
+  subscription2: Subscription;
+
   n1: number = 0;
   n2: number = 0;
   s1: string = "";
@@ -63,5 +65,14 @@ export class BasicComponent implements OnInit {
       (error) => {this.s1 = 'Error: ' + error},
       () => {this.s1 = 'Completed'}
     );
+    this.subscription2 = myIntervalObservable.subscribe(
+      (_n) => {this.n2 = _n},
+      (error) => {this.s2 = 'Error: ' + error},
+      () => {this.s2 = 'Completed'}
+    );
+    setTimeout(()=>{
+      this.subscription1.unsubscribe();
+      this.subscription2.unsubscribe();
+    }, 11000)
   }
 }
