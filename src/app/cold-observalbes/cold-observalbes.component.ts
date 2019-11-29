@@ -3,11 +3,11 @@ import { Observable, Observer, interval, observable, Subscription } from 'rxjs';
 import { nextTick } from 'q';
 
 @Component({
-  selector: 'app-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css']
+  selector: 'app-cold-observalbes',
+  templateUrl: './cold-observalbes.component.html',
+  styleUrls: ['./cold-observalbes.component.css']
 })
-export class BasicComponent implements OnInit {
+export class ColdObservalbesComponent implements OnInit {
 
   subscription1: Subscription;
   subscription2: Subscription;
@@ -22,28 +22,6 @@ export class BasicComponent implements OnInit {
     this.s1 = 'Initializing s1...';
     this.s2 = 'Initializing s2...';
 
-    const myFirstObservable = new Observable(
-      (observer: Observer<number>) => {
-        observer.next(1); // quem estiver observando esse objeto verá essas infors next(1)...
-        observer.next(2);
-        observer.next(3);
-        observer.next(4);
-        observer.next(5);
-        observer.error("6");
-        observer.complete();
-      }
-    );
-    myFirstObservable.subscribe(
-      (n: number) => console.log("First: ",n), 
-      (error) => console.error(error),
-      () => console.log('completed'));
-
-    // const timerCount = interval(500);
-    // timerCount.subscribe(
-    //     (n) => console.log(n)
-    //   );
-    // console.log("after interval");
-
     const myIntervalObservable = new Observable(
       (observer: Observer<any>) => {
         let i: number = 0;
@@ -51,7 +29,8 @@ export class BasicComponent implements OnInit {
           i++;
           console.log('from Observable: ', i);
           if (i == 10)
-            observer.complete();
+            //observer.complete();
+            observer.next(i); // chega até 10 na contagem
           else if (i%2 == 0)
             observer.next(i);
         }, 1000);

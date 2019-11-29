@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BasicComponent } from './basic/basic.component';
+import { ColdObservalbesComponent } from './cold-observalbes/cold-observalbes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasicComponent
+    BasicComponent,
+    ColdObservalbesComponent
   ],
   imports: [
     BrowserModule
