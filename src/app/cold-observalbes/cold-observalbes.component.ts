@@ -44,11 +44,14 @@ export class ColdObservalbesComponent implements OnInit {
       (error) => {this.s1 = 'Error: ' + error},
       () => {this.s1 = 'Completed s1'}
     );
-    this.subscription2 = myIntervalObservable.subscribe(
-      (_n) => {this.n2 = _n},
-      (error) => {this.s2 = 'Error: ' + error},
-      () => {this.s2 = 'Completed s2'}
-    );
+    setInterval( ()=> {
+      this.subscription2 = myIntervalObservable.subscribe(
+        (_n) => {this.n2 = _n},
+        (error) => {this.s2 = 'Error: ' + error},
+        () => {this.s2 = 'Completed s2'}
+      );
+    }, 3000);
+    
     setTimeout(()=>{
       this.subscription1.unsubscribe();
       this.subscription2.unsubscribe();
