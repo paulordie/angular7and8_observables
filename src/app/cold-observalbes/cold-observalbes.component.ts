@@ -29,8 +29,8 @@ export class ColdObservalbesComponent implements OnInit {
           i++;
           console.log('from Observable: ', i);
           if (i == 10)
-            //observer.complete();
-            observer.next(i); // chega até 10 na contagem
+            observer.complete();
+            //observer.next(i); // chega até 10 na contagem
           else if (i%2 == 0)
             observer.next(i);
         }, 1000);
@@ -39,6 +39,7 @@ export class ColdObservalbesComponent implements OnInit {
         }
       }
     );
+    this.s1 = 'waiting for interval...';
     this.subscription1 = myIntervalObservable.subscribe(
       (_n) => {this.n1 = _n},
       (error) => {this.s1 = 'Error: ' + error},
