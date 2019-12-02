@@ -39,12 +39,13 @@ export class ColdObservalbesComponent implements OnInit {
         }
       }
     );
-    this.s1 = 'waiting for interval...';
+    this.s1 = 's1 waiting for interval...';
     this.subscription1 = myIntervalObservable.subscribe(
       (_n) => {this.n1 = _n},
       (error) => {this.s1 = 'Error: ' + error},
       () => {this.s1 = 'Completed s1'}
     );
+    this.s2 = 's2 waiting for interval...';
     setInterval( ()=> {
       this.subscription2 = myIntervalObservable.subscribe(
         (_n) => {this.n2 = _n},
