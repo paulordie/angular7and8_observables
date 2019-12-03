@@ -8,7 +8,7 @@ import { Observable, fromEvent, Observer } from 'rxjs';
 })
 export class HotObservablesIntroComponent implements OnInit {
 
-  @ViewChild('myButton') button: ElementRef;
+  @ViewChild('myButton', {static: true}) button: ElementRef;
 
   n1: number = 0;
   n2: number = 0;
