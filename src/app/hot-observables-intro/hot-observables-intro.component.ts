@@ -28,8 +28,8 @@ export class HotObservablesIntroComponent implements OnInit {
       private id;
 
       addListener(l) {
-        this.myListeners.push(l);
-        console.log(this.myListeners.length);
+        this.myListeners.push(l); 
+        console.log(this.myListeners.length);//unica fonte de geracao de dado
       }
 
       start() {
@@ -48,9 +48,15 @@ export class HotObservablesIntroComponent implements OnInit {
     producer.start();
     setTimeout(
       ()=>{
-        producer.addListener((n) => console.log('From listener 1', n));
+        producer.addListener((n) => console.log('From listener 1', n)); //n seria uma funcao
         producer.addListener((n) => console.log('From listener 2', n));
       }, 4000);
-   
+    const myHotObservable = new Observable(
+      (observer: Observer<number>)=> {
+        producer.addListener( (n) => observer.next(n))
+      }
+    );
+    myHotObservable.subscribe((n) => console.log("From Subcribe Hot 1")); // cada subscribe vai criar um novo observable
+    myHotObservable.subscribe((n) => console.log("From Subcribe Hot 2")); // ai vai chamar varias vezes o addListener
   }
 }
