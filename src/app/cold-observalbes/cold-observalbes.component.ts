@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Observer, interval, observable, Subscription } from 'rxjs';
-import { nextTick } from 'q';
 
 @Component({
   selector: 'app-cold-observalbes',
