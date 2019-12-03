@@ -46,8 +46,11 @@ export class HotObservablesIntroComponent implements OnInit {
     }
     let producer: Producer = new Producer();
     producer.start();
-
-    producer.addListener((n) => console.log('From listener 1', n));
-    producer.addListener((n) => console.log('From listener 2', n));
+    setTimeout(
+      ()=>{
+        producer.addListener((n) => console.log('From listener 1', n));
+        producer.addListener((n) => console.log('From listener 2', n));
+      }, 4000);
+   
   }
 }
